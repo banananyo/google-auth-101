@@ -24,19 +24,19 @@
                 console.log('Email: ' + profile.getEmail());
             }
         })();
-        gapi.load('auth2', function() {
-            auth2 = gapi.auth2.init({
-                client_id: '904195872691-59fcln5nh2ciuemup8m2e754qsaa01r2.apps.googleusercontent.com',
-                fetch_basic_profile: false,
-                scope: 'profile'
-            });
+        // gapi.load('auth2', function() {
+        //     auth2 = gapi.auth2.init({
+        //         client_id: '904195872691-59fcln5nh2ciuemup8m2e754qsaa01r2.apps.googleusercontent.com',
+        //         fetch_basic_profile: false,
+        //         scope: 'profile'
+        //     });
 
-            // Sign the user in, and then retrieve their ID.
-            auth2.signIn().then(function() {
-                console.log('auto');
-                console.log(auth2.currentUser.get().getId());
-            });
-        });
+        //     // Sign the user in, and then retrieve their ID.
+        //     auth2.signIn().then(function() {
+        //         console.log('auto');
+        //         console.log(auth2.currentUser.get().getId());
+        //     });
+        // });
         function onSignIn(googleUser) {
             // Useful data for your client-side scripts:
             var profile = googleUser.getBasicProfile();
