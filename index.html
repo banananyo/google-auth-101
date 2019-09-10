@@ -21,12 +21,27 @@
     <div class="center-things">
         <h1>Google Authentication 101</h1>
         <hr />
-        <div id="loginButton"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
-        <div id="logoutButton"><button class="btn btn-danger" onclick="signOut();">Sign out</button></div>
+        <div id="logoutScope" class="card" style="width: 18rem;">
+            <img id="profile-image-url" src="" class="card-img-top" alt="profile image">
+            <div class="card-body">
+                <h5 class="card-title" id="profile-name">name</h5>
+                <p class="card-text">
+                    ID: <span id="profile-id"></span>
+                    Email: <span id="profile-email"></span>
+                </p>
+                <button class="btn btn-danger" onclick="signOut();">Sign out</button>
+            </div>
+        </div>
+        <div id="loginScope"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
     </div>
     <script>
-        const loginButton = document.getElementById('loginButton');
-        const logoutButton = document.getElementById('logoutButton');
+        const loginScope = document.getElementById('loginScope');
+        const logoutScope = document.getElementById('logoutScope');
+
+        const name = document.getElementById('profile-name');
+        const id = document.getElementById('profile-id');
+        const email = document.getElementById('profile-email');
+        const imageUrl = document.getElementById('profile-image-url');
         function show(el) {
             el.style.display = 'block';
         }
@@ -34,24 +49,37 @@
             el.style.display = 'none';
         }
         (function() {
-            hide(logoutButton);
+            hide(logoutScope);
         })();
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-            hide(loginButton);
-            show(logoutButton);
+            const profileId = profile.getId();
+            const profileName = profile.getName();
+            const profileImageUrl = profile.getImageUrl();
+            const profileEmail = profile.getEmail();
+            const obj = {
+                profileId,
+                profileName,
+                profileImageUrl,
+                profileEmail,
+            }
+            console.log({ obj });
+
+            name.innerText = profileName;
+            id.innerText = profileId;
+            email.innerText = profileEmail;
+            imageUrl.src = profileImageUrl;
+
+            hide(loginScope);
+            show(logoutScope);
         }
 
         function signOut() {
             var auth2 = gapi.auth2.getAuthInstance();
             auth2.signOut().then(function () {
                 console.log('User signed out.');
-                show(loginButton);
-                hide(logoutButton);
+                show(loginScope);
+                hide(logoutScope);
             });
         }
     </script>
