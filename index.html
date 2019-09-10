@@ -4,12 +4,25 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id"
         content="904195872691-59fcln5nh2ciuemup8m2e754qsaa01r2.apps.googleusercontent.com">
-    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .center-things {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="loginButton"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
-    <div id="logoutButton"><button onclick="signOut();">Sign out</button></div>
+    <div class="center-things">
+        <h1>Google Authentication 101</h1>
+        <hr />
+        <div id="loginButton"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
+        <div id="logoutButton"><button class="btn btn-danger" onclick="signOut();">Sign out</button></div>
+    </div>
     <script>
         const loginButton = document.getElementById('loginButton');
         const logoutButton = document.getElementById('logoutButton');
