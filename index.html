@@ -8,85 +8,33 @@
 </head>
 
 <body>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <a href="#" onclick="signOut();">Sign out</a>
-    <div id="signed-in-cell"></div>
-    <div id="curr-user-cell"></div>
-    <div id="user-id"></div>
-    <div id="user-scopes"></div>
-    <div id="auth-response"></div>
+    <div id="loginButton"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
+    <div id="logoutButton"><button onclick="signOut();">Sign out</button></div>
     <script>
-        // var auth2;
-        // var googleUser;
-        // var appStart = function() {
-        //     gapi.load('auth2', initSigninV2);
-        // };
-        // var initSigninV2 = function() {
-        //     auth2 = gapi.auth2.init({
-        //         client_id: '904195872691-59fcln5nh2ciuemup8m2e754qsaa01r2.apps.googleusercontent.com',
-        //         scope: 'profile'
-        //     });
-        //     auth2.isSignedIn.listen(signinChanged);
-        //     auth2.currentUser.listen(userChanged);
-        //     if (auth2.isSignedIn.get() == true) {
-        //         auth2.signIn();
-        //     }
-        //     refreshValues();
-        // };
-
-        // var signinChanged = function (val) {
-        //     console.log('Signin state changed to ', val);
-        //     document.getElementById('signed-in-cell').innerText = val;
-        // };
-
-        // var userChanged = function (user) {
-        //     console.log('User now: ', user);
-        //     googleUser = user;
-        //     updateGoogleUser();
-        //     document.getElementById('curr-user-cell').innerText =
-        //         JSON.stringify(user, undefined, 2);
-        // };
-
-        // var updateGoogleUser = function () {
-        //     if (googleUser) {
-        //         document.getElementById('user-id').innerText = googleUser.getId();
-        //         document.getElementById('user-scopes').innerText =
-        //         googleUser.getGrantedScopes();
-        //         document.getElementById('auth-response').innerText =
-        //         JSON.stringify(googleUser.getAuthResponse(), undefined, 2);
-        //     } else {
-        //         document.getElementById('user-id').innerText = '--';
-        //         document.getElementById('user-scopes').innerText = '--';
-        //         document.getElementById('auth-response').innerText = '--';
-        //     }
-        // };
-
-        // var refreshValues = function() {
-        //     if (auth2){
-        //         console.log('Refreshing values...');
-
-        //         googleUser = auth2.currentUser.get();
-
-        //         document.getElementById('curr-user-cell').innerText =
-        //         JSON.stringify(googleUser, undefined, 2);
-        //         document.getElementById('signed-in-cell').innerText =
-        //         auth2.isSignedIn.get();
-
-        //         updateGoogleUser();
-        //     }
-        // }
+        const loginButton = document.getElementById('loginButton');
+        const logoutButton = document.getElementById('logoutButton');
+        function show(el) {
+            el.style.display = 'block';
+        }
+        function hide(el) {
+            el.style.display = 'none';
+        }
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
             console.log('Name: ' + profile.getName());
             console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            hide(loginButton);
+            show(logoutButton);
         }
 
         function signOut() {
             var auth2 = gapi.auth2.getAuthInstance();
             auth2.signOut().then(function () {
                 console.log('User signed out.');
+                show(loginButton);
+                hide(logoutButton);
             });
         }
     </script>
