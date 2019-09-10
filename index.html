@@ -19,6 +19,9 @@
         function hide(el) {
             el.style.display = 'none';
         }
+        (function() {
+            hide(logoutButton);
+        })();
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
