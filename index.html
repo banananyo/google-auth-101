@@ -33,13 +33,13 @@
             // Start with the current live values.
             refreshValues();
         };
-        (function() {
+        var startApp = function() {
             gapi.load('auth2', initSigninV2);
             // if (auth2.isSignedIn.get()) {
             //     var profile = auth2.currentUser.get().getBasicProfile();
             //     console.log('Email: ' + profile.getEmail());
             // }
-        })();
+        };
 
         var signinChanged = function (val) {
             console.log('Signin state changed to ', val);
@@ -101,6 +101,7 @@
         }
     </script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>startApp();</script>
 </body>
 
 </html>
